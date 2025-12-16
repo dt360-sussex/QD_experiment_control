@@ -18,7 +18,7 @@ class SDG6022X:
         """Turn output ON"""
         self.instrument.write("C1:OUTP ON")
 
-    def set_freq(self, waveform="SQUARE", freq=500, amp=1):
+    def set_freq(self, waveform, freq, amp):
         """Set frequency, waveform and amplitude"""
         cmd = f"C1:BSWV WVTP,{waveform},FRQ,{freq},AMP,{amp}"
         self.instrument.write(cmd)
@@ -33,6 +33,6 @@ if __name__ == "__main__":
     awg = SDG6022X(ip) 
 
     awg.control_on()
-    awg.set_freq()
+    awg.set_freq("SINE", 5000, 1.0)
     #awg.control_off()
     awg.close()
