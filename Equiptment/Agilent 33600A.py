@@ -7,8 +7,6 @@ ip = 'TCPIP::169.254.11.23::INSTR'
 
 class Agilent33600A(AWG.GenericAWG):
     """Minimal driver wrapper for Keysight/Agilent 33600A series AWGs."""
-    _default_operation_timeout = 10.0
-    _default_backend_timeout = 5.0
     
     def __init__(self, addr):
         self._channels_number = 2 
@@ -18,7 +16,7 @@ class Agilent33600A(AWG.GenericAWG):
 
         # Set once, never touch again
         raw_dev.timeout = 20_000          # ms
-        raw_dev.chunk_size = 4 * 1024 * 1024  # 4 MB safe value|
+        raw_dev.chunk_size = 4 * 1024 * 1024  # 4 MB safe value
 
     def upload_custom_waveform(self, name, waveform, channel=1):
         waveform = np.asarray(waveform, dtype=np.float32)
@@ -67,7 +65,7 @@ if __name__=="__main__":
     random_string = ''.join(random.choices(string.ascii_letters, k=length))
 
 
-
+    
     # Run class wrapper
     awg = Agilent33600A(ip)
 
