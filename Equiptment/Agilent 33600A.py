@@ -53,34 +53,33 @@ class Agilent33600A(AWG.GenericAWG):
         self.write("*WAI")
         self.write(f"SOUR{channel}:FUNC:ARB:SRAT {sample_rate}") #Set sample rate
 
-
-# Generate waveform
-num_points = 4e6
-sample_rate = 1e6
-t = np.linspace(0, 1, int(num_points))
-sig = np.sin(2 * np.pi * np.random.random()*50 * t) + np.sin(2 * np.pi * np.random.random()*50 * t) + np.sin(2 * np.pi * np.random.random()*50 * t) 
-sig /= np.max(np.abs(sig))
-
-
-import random
-import string
-length = 4
-random_string = ''.join(random.choices(string.ascii_letters, k=length))
+if __name__=="__main__":
+    num_points = 4e6
+    sample_rate = 1e6
+    t = np.linspace(0, 1, int(num_points))
+    sig = np.sin(2 * np.pi * np.random.random()*50 * t) + np.sin(2 * np.pi * np.random.random()*50 * t) + np.sin(2 * np.pi * np.random.random()*50 * t) 
+    sig /= np.max(np.abs(sig))
 
 
+    import random
+    import string
+    length = 4
+    random_string = ''.join(random.choices(string.ascii_letters, k=length))
 
-# Run class wrapper
-awg = Agilent33600A(ip)
 
-awg.upload_custom_waveform(random_string, sig)
-awg.set_function('arb')
 
-# print(awg.ask("SYST:ERR?"))
+    # Run class wrapper
+    awg = Agilent33600A(ip)
 
-# awg.set_sample_rate(1000, 1)
-# awg.set_offset(0)
-# awg.set_amplitude(1.5)
+    awg.upload_custom_waveform(random_string, sig)
+    awg.set_function('arb')
 
-awg.close()
+    # print(awg.ask("SYST:ERR?"))
+
+    # awg.set_sample_rate(1000, 1)
+    # awg.set_offset(0)
+    # awg.set_amplitude(1.5)
+
+    awg.close()
 
 
