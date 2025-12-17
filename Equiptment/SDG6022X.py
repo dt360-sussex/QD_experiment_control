@@ -40,6 +40,6 @@ if __name__ == "__main__":
     awg = SDG6022X(ip)  # or SDG6022X("TCPIP::192.168.0.10::INSTR") if you know the address
 
     # awg.control_on()
-    # awg.set_freq()
+    awg.set_freq()
     # awg.control_off()
     awg.close()

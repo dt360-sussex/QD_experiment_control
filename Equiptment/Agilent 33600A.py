@@ -3,7 +3,7 @@ import numpy as np
 
 
 
-ip = 'TCPIP::169.254.11.23::INSTR'
+ip = 'TCPIP0::169.254.11.23::inst0::INSTR'
 
 class Agilent33600A(AWG.GenericAWG):
     """Minimal driver wrapper for Keysight/Agilent 33600A series AWGs."""
@@ -52,7 +52,7 @@ class Agilent33600A(AWG.GenericAWG):
         self.write(f"SOUR{channel}:FUNC:ARB:SRAT {sample_rate}") #Set sample rate
 
 if __name__=="__main__":
-    num_points = 4e6
+    num_points = 1e4
     sample_rate = 1e6
     t = np.linspace(0, 1, int(num_points))
     sig = np.sin(2 * np.pi * np.random.random()*50 * t) + np.sin(2 * np.pi * np.random.random()*50 * t) + np.sin(2 * np.pi * np.random.random()*50 * t) 
