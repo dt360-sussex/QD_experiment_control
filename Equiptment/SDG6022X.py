@@ -1,6 +1,5 @@
 import pyvisa
 
-
 class SDG6022X:
     def __init__(self, addr):
         
@@ -18,9 +17,9 @@ class SDG6022X:
         """Turn output ON"""
         self.instrument.write("C1:OUTP ON")
 
-    def set_freq(self, waveform, freq, amp):
+    def set_freq(self, waveform, freq, amp, stdev):
         """Set frequency, waveform and amplitude"""
-        cmd = f"C1:BSWV WVTP,{waveform},FRQ,{freq},AMP,{amp}"
+        cmd = f"C1:BSWV WVTP,{waveform},FRQ,{freq},AMP,{amp}, STDEV,{stdev}"
         self.instrument.write(cmd)
         
     def close(self):
@@ -33,6 +32,6 @@ if __name__ == "__main__":
     awg = SDG6022X(ip) 
 
     awg.control_on()
-    awg.set_freq("SINE", 5000, 1.0)
+    awg.set_freq("NOISE", 5055, 0.01, 3.0)
     #awg.control_off()
     awg.close()
